@@ -47,6 +47,9 @@
     <!-- Activity title when the user is selecting a contact for a direct message shortcut. -->
     <string name="messageShortcutActivityTitle">Choose a number to message</string>
 
+    <!-- Activity title when the user is inserting into an existing contact, or creating a new one.  [CHAR LIMIT=128] -->
+    <string name="contactInsertOrEditActivityTitle">Add to contact</string>
+
     <!-- Activity title when the user is selecting a contact.  [CHAR LIMIT=128] -->
     <string name="contactPickerActivityTitle">Choose a contact</string>
 
@@ -129,6 +132,8 @@
     <!-- Menu item that deletes the currently selected group [CHAR LIMIT=30] -->
     <string name="menu_deleteGroup">Delete</string>
 
+    <string name="menu_moveGroupMembers">Move group members</string>
+
     <!-- Menu item (in the action bar) that creates a new contact [CHAR LIMIT=30] -->
     <string name="menu_new_contact_action_bar">Add Contact</string>
 
@@ -161,8 +166,6 @@
 
     <!-- Toast shown after two contacts have been joined by a user action -->
     <string name="contactsJoinedMessage">Contacts joined</string>
-
-    <string name="importConfirmation_title">Import contact?</string>
 
     <!-- Menu item that opens the Options activity for a given contact [CHAR LIMIT=15] -->
     <string name="menu_set_ring_tone">Set ringtone</string>
@@ -249,24 +252,10 @@
 
     <!-- Toast displayed when a contact is saved [CHAR LIMIT=NONE] -->
     <string name="contactSavedToast">Contact saved.</string>
-    <!-- Toast displayed when a contact is deleted [CHAR LIMIT=NONE] -->
-    <string name="contactDeletedToast">Contact deleted.</string>
 
     <!-- Toast displayed when saving a contact failed. [CHAR LIMIT=NONE] -->
     <string name="contactSavedErrorToast">Couldn\'t save contact changes.</string>
 
-    <!-- Toast displayed when saving a contact to sim card failed -->
-    <string name="contactSavedToSimCardError">Error, Loading Sim Contacts.</string>
-    <string name="airplane_mode_on">Error, Airplane mode is on.</string>
-    <string name="number_anr_too_long">Error, Number is too long.</string>
-    <string name="email_address_too_long">Error, Email Address is too long.</string>
-    <string name="sim_card_full">Error, Sim Card is full.</string>
-    <string name="tag_too_long">Error, Contact name is too long.</string>
-    <string name="no_phone_number">Please insert phone number.</string>
-    <string name="invalid_phone_number">Error, Number is invalid.</string>
-    <string name="invalid_number_type">Error, Number type is invalid.</string>
-    <string name="no_phone_number_or_email">Please insert phone number or email address.</string>
-    <string name="memory_card_full">Error, Memory is almost full.</string>
     <!-- Toast displayed when a group is saved [CHAR LIMIT=NONE] -->
     <string name="groupSavedToast">Group saved.</string>
 
@@ -303,6 +292,9 @@
     <!-- The title of "favorites" tab. [CHAR LIMIT=14] -->
     <string name="favorites_tab_label">Favorites</string>
 
+    <!-- The title of "groups" tab. [CHAR LIMIT=14] -->
+    <string name="contacts_groups_label">Groups</string>
+
     <!-- Action string for calling back a number in the call log -->
     <string name="callBack">Call back</string>
 
@@ -327,6 +319,7 @@
          Used by AccessibilityService to announce the purpose of the button.
     -->
     <string name="description_plus_button">plus</string>
+
     <!-- Message in progress bar while exporting contact list to a file "(current number) of (total number) contacts" The order of "current number" and "total number" cannot be changed (like "total: (total number), current: (current number)")-->
     <string name="exporting_contact_list_progress"><xliff:g id="current_number">%s</xliff:g> of <xliff:g id="total_number">%s</xliff:g> contacts</string>
 
@@ -362,6 +355,12 @@
     <!-- Title for the disambiguation dialog that requests the user choose an account for the new group to be created under [CHAR LIMIT=NONE] -->
     <string name="dialog_new_group_account">Create group under account</string>
 
+    <string name="title_move_members">Move members</string>
+    <string name="message_add_members">Add members...</string>
+    <string name="message_move_members">Move members...</string>
+    <string name="cancel_operation">Operation is canceled.</string>
+    <string name="message_can_not_move_members">Can not move members</string>
+
     <!-- Generic action string for starting an audio chat. Used by AccessibilityService to announce the purpose of the view. [CHAR LIMIT=NONE] -->
     <string name="audio_chat">Voice chat</string>
     <!-- Generic action string for starting a video chat. Used by AccessibilityService to announce the purpose of the view. [CHAR LIMIT=NONE] -->
@@ -384,9 +383,6 @@
 
     <!-- String describing which account a contact came from when editing it -->
     <string name="from_account_format"><xliff:g id="source" example="user@gmail.com">%1$s</xliff:g></string>
-
-    <!-- Checkbox asking the user if they want to display a particular photo for a contact -->
-    <string name="use_photo_as_primary">Use this photo</string>
 
     <!-- Text used to explain that a contact cannot be edited from the People application since the data is read only [CHAR LIMIT=40] -->
     <string name="contact_read_only">Not editable from this app.</string>
@@ -438,9 +434,6 @@
     <!-- Label to clear all selection in multiple picker -->
     <string name="menu_select_none">"Unselect all"</string>
 
-    <!-- The add field button shown in the editor under each editable Raw Contact [CHAR LIMIT=30] -->
-    <string name="add_field">Add another field</string>
-
     <!-- The button to add another entry of a specific data type (i.e. email, phone, address) to a contact in the Raw Contact Editor [CHAR LIMIT=22] -->
     <string name="add_new_entry_for_section">Add new</string>
 
@@ -452,6 +445,12 @@
 
     <!-- The button to add an organization field to a contact in the Raw Contact Editor [CHAR LIMIT=15] -->
     <string name="group_edit_field_hint_text">Group name</string>
+
+    <!-- Button used for changing a photo in the Raw Contact Editor [CHAR LIMIT=15] -->
+    <string name="change_photo">Change</string>
+
+    <!-- RadioButton that determines whether a raw contact's photo should be used for the entire contact [CHAR LIMIT=15] -->
+    <string name="primary_photo">Primary photo</string>
 
     <!-- String describing the Star/Favorite checkbox
 
@@ -591,7 +590,6 @@
     <!-- Option displayed in context menu to clear long pressed item as default contact method [CHAR LIMIT=64] -->
     <string name="clear_default">Clear default</string>
 
-    <string name="edit_before_call">Edit number before call</string>
     <!-- Toast shown when text is copied to the clipboard [CHAR LIMIT=64] -->
     <string name="toast_text_copied">Text copied</string>
 
@@ -659,36 +657,9 @@
 
     <!-- Button label to prompt the user to add another account (when there are already existing accounts on the device) [CHAR LIMIT=30] -->
     <string name="add_new_account">Add new account</string>
-    <string name="select_all">All</string>
-    <string name="btn_ok">Ok</string>
-    <string name="btn_cancel">Cancel</string>
-    <string name="menu_sendViaSMS">Send contact via SMS</string>
-    <!-- Gray hint displayed in the search field in Contacts when empty -->
-    <string name="search_bar_hint">Search contacts</string>
-    <!-- Confirmation dialog title after users selects to delete a contact. [CHAR LIMIT=25]-->
-    <string name="deleteConfirmation_title">Delete contact?</string>
-    <string name="import_sim_contacts_title">Import sim contacts</string>
-    <string name="import_sim_contacts_message">Importing sim contacts ...</string>
-    <string name="ContactMultiImportConfirmation">These contacts will be imported.</string>
-    <string name="import_finish">"Import finished"</string>
-    <string name="import_stop">"Import stopped"</string>
-    <string name="too_many_contacts_add_to_group">Too many contacts, that should be less than <xliff:g id="count">%d</xliff:g></string>
-    <!-- Multi Delete Contacts related strings -->
-    <string name="ContactMultiDeleteConfirmation">These contacts will be deleted.</string>
-    <string name="delete_contacts_title">Delete Contacts</string>
-    <string name="delete_contacts_message">Deleting Contacts ...</string>
-    <string name="delete_termination">"Delete is termination"</string>
+
     <!-- Menu item shown only when the special debug mode is enabled, which is used to send all contacts database files via email.  [CHAR LIMI=NONE] -->
     <string name="menu_export_database">Export database files</string>
-
-    <!-- add for MemoryStatusActivity -->
-    <string name="menu_memory_status">Memory status</string>
-    <string name="memory_status_title">Memory status</string>
-    <string name="memory_size">Total:</string>
-    <string name="memory_available">Available</string>
-    <string name="memory_used">Used:</string>
-    <string name="calculating_status_now">Calculating Status now...</string>
-    <string name="contact_detail_picture_description">Picture. Select to change</string>
 
     <!-- Content description for the button that adds a new contact
          [CHAR LIMIT=NONE] -->
@@ -745,12 +716,27 @@
     <string name="header_event_entry">Event</string>
     <!-- Header for the Relation entry [CHAR LIMIT=40] -->
     <string name="header_relation_entry">Relation</string>
+    <!-- Content description for the account field header image. Example accounts listed in this field: Google, Hotmail and Exchange. [CHAR LIMIT=NONE] -->
+    <string name="header_account_entry">Account</string>
+    <!-- Content description for the name fields header entry [CHAR LIMIT=NONE] -->
+    <string name="header_name_entry">Name</string>
+    <!-- Content description for the email fields header entry [CHAR LIMIT=NONE] -->
+    <string name="header_email_entry">Email</string>
+    <!-- Content description for the phone fields header entry [CHAR LIMIT=NONE] -->
+    <string name="header_phone_entry">Phone</string>
+    <!-- Content description for the camera icon beside the photo section in the Raw Contact Editor [CHAR LIMIT=NONE] -->
+    <string name="header_photo_entry">Photo</string>
+
+    <!-- Content description for the expand button inside the raw contact editor's header. [CHAR LIMIT=NONE] -->
+    <string name="content_description_expand_editor">Click to expand contact editor.</string>
+    <!-- Content description for the collapse button inside the raw contact editor's header. [CHAR LIMIT=NONE] -->
+    <string name="content_description_collapse_editor">Click to collapse contact editor.</string>
 
     <!-- Content description for directions secondary button [CHAR LIMIT=NONE] -->
     <string name="content_description_directions">directions to location</string>
 
     <!-- Content description for recent sms interaction [CHAR LIMIT=NONE] -->
-    <string name="content_description_recent_sms">recent sms. <xliff:g id="message_details">%s</xliff:g>. click to respond</string>
+    <string name="content_description_recent_sms">recent sms. <xliff:g id="message_body">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. click to respond</string>
 
     <!-- Header for the Relation entry [CHAR LIMIT=NONE] -->
     <string name="content_description_recent_call_type_incoming">incoming</string>
@@ -760,17 +746,19 @@
     <string name="content_description_recent_call_type_missed">missed</string>
 
     <!-- Content description for recent sms interaction [CHAR LIMIT=NONE] -->
-    <string name="content_description_recent_call">recent call. <xliff:g id="call_details">%s</xliff:g>. click to call back</string>
+    <string name="content_description_recent_call">recent call. <xliff:g id="call_type">%s</xliff:g>. <xliff:g id="phone_number">%s</xliff:g>. <xliff:g id="date">%s</xliff:g>. click to call back</string>
+
+    <!-- File Authority for the photo picker -->
+    <string name="photo_file_provider_authority" translatable="false">com.android.contacts.files</string>
 
     <!-- Prefix for messages that you sent [CHAR LIMIT=40] -->
     <string name="message_from_you_prefix">You: <xliff:g id="sms_body">%s</xliff:g></string>
 
+    <string name="menu_copyTo">"Copy to "</string>
+    <string name="no_empty_email_in_usim">"Email is full, some record copy failed "</string>
     <!-- File Authority for the photo picker -->
     <string name="photo_file_provider_authority" translatable="false">com.android.contacts.files</string>
-    <string name="voicemail">Voicemail</string>
-    <string name="select_call_title">Select call logs</string>
-    <string name="delete_call_title">Delete call logs</string>
-    <string name="delete_call_message">Deleting call logs ...</string>
-    <string name="delete_call_alert">Sure to delete the call logs selected?</string>
-    <string name="title_del_call">Delete</string>
+
+    <!-- When a user tries to create an IM Hangouts field, an alert dialog pops up displaying this message. We don't want users entering email addresses of phone numbers into the IM field. [CHAR LIMIT=200] -->
+    <string name="contact_editor_hangouts_im_alert">Hangouts works better when you enter the person\'s Hangouts identifier into the email field or phone field.</string>
 </resources>

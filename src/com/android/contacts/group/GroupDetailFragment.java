@@ -31,7 +31,11 @@ import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.Groups;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -50,13 +54,15 @@ import android.widget.Toast;
 import com.android.contacts.GroupMemberLoader;
 import com.android.contacts.GroupMetaDataLoader;
 import com.android.contacts.R;
+import com.android.contacts.activities.MultiPickContactActivity;
 import com.android.contacts.common.ContactPhotoManager;
-import com.android.contacts.interactions.GroupDeletionDialogFragment;
+import com.android.contacts.common.SimContactsConstants;
 import com.android.contacts.common.list.ContactTileAdapter;
 import com.android.contacts.common.list.ContactTileView;
-import com.android.contacts.list.GroupMemberTileAdapter;
 import com.android.contacts.common.model.AccountTypeManager;
 import com.android.contacts.common.model.account.AccountType;
+import com.android.contacts.interactions.GroupDeletionDialogFragment;
+import com.android.contacts.list.GroupMemberTileAdapter;
 
 /**
  * Displays the details of a group and shows a list of actions possible for the group.
@@ -114,6 +120,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
     private Uri mGroupUri;
     private long mGroupId;
     private String mGroupName;
+    private String mAccountNameString;
     private String mAccountTypeString;
     private String mDataSet;
     private boolean mIsReadOnly;
@@ -297,6 +304,7 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
     private void bindGroupMetaData(Cursor cursor) {
         cursor.moveToPosition(-1);
         if (cursor.moveToNext()) {
+            mAccountNameString = cursor.getString(GroupMetaDataLoader.ACCOUNT_NAME);
             mAccountTypeString = cursor.getString(GroupMetaDataLoader.ACCOUNT_TYPE);
             mDataSet = cursor.getString(GroupMetaDataLoader.DATA_SET);
             mGroupId = cursor.getLong(GroupMetaDataLoader.GROUP_ID);
@@ -453,6 +461,9 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
 
         final MenuItem deleteMenu = menu.findItem(R.id.menu_delete_group);
         deleteMenu.setVisible(mOptionsMenuGroupDeletable);
+
+        final MenuItem moveMenu = menu.findItem(R.id.menu_move_group_members);
+        moveMenu.setVisible(isVisible() && mAdapter != null && mAdapter.getCount() > 0);
     }
 
     @Override
@@ -465,6 +476,18 @@ public class GroupDetailFragment extends Fragment implements OnScrollListener {
             case R.id.menu_delete_group: {
                 GroupDeletionDialogFragment.show(getFragmentManager(), mGroupId, mGroupName,
                         mCloseActivityAfterDelete);
+                return true;
+            }
+            case R.id.menu_move_group_members: {
+                Intent intent = new Intent(SimContactsConstants.ACTION_MULTI_PICK);
+                intent.setType(Contacts.CONTENT_TYPE);
+                intent.putExtra(SimContactsConstants.IS_CONTACT, true);
+                intent.putExtra(MultiPickContactActivity.EXTRA_GROUP_ID, getGroupId());
+                intent.putExtra(SimContactsConstants.ACCOUNT_TYPE, mAccountTypeString);
+                intent.putExtra(SimContactsConstants.ACCOUNT_NAME, mAccountNameString);
+                intent.putExtra(MultiPickContactActivity.EXTRA_GROUP_ACTION,
+                        MultiPickContactActivity.GROUP_ACTION_MOVE_MEMBER);
+                startActivity(intent);
                 return true;
             }
         }

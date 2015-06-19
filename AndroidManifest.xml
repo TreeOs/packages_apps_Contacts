@@ -216,7 +216,7 @@
 
         <activity
             android:name=".activities.MemoryStatusActivity"
-            android:label="@string/memory_status_title"
+            android:label="@string/menu_memory_status"
             android:theme="@style/ContactListFilterTheme" />
 
         <!-- Used to select display and sync groups -->
@@ -228,7 +228,7 @@
         <activity
             android:name=".activities.ShowOrCreateActivity"
             android:label="@string/launcherActivityLabel"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            android:theme="@android:style/Theme.Material.Light.Dialog.NoActionBar">
 
             <intent-filter>
                 <action android:name="com.android.contacts.action.SHOW_OR_CREATE_CONTACT" />
@@ -266,7 +266,7 @@
                 <data android:mimeType="vnd.android.cursor.item/person" />
             </intent-filter>
 
-            <intent-filter android:label="@string/viewContactDesription">
+            <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="vnd.android.cursor.item/person" />
@@ -435,10 +435,10 @@
             android:theme="@style/BackgroundOnlyTheme" />
 
         <activity
-            android:name=".editor.MultiPickContactActivity"
+            android:name=".activities.MultiPickContactActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:screenOrientation="nosensor"
-            android:theme="@android:style/Theme.Holo.Light"
+            android:theme="@style/ContactPickerTheme"
             android:configChanges="orientation|keyboardHidden|layoutDirection">
             <intent-filter>
                 <action android:name="com.android.contacts.action.MULTI_PICK" />

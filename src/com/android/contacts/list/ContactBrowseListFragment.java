@@ -126,6 +126,9 @@ public abstract class ContactBrowseListFragment extends
 
                 Log.e(TAG, "Error: No contact ID or lookup key for contact " + mUri);
                 return null;
+            } catch (Exception e) {
+                Log.e(TAG, "Error loading the contact: " + mUri, e);
+                return null;
             } finally {
                 if (cursor != null) {
                     cursor.close();
@@ -413,6 +416,7 @@ public abstract class ContactBrowseListFragment extends
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
+        super.onLoaderReset(loader);
     }
 
     private void checkSelection() {

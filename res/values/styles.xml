@@ -15,20 +15,24 @@
 -->
 <resources>
 
-    <style name="DetailActivityTheme" parent="@android:style/Theme.Holo.Light">
+    <style name="DetailActivityTheme" parent="@android:style/Theme.Material.Light">
         <item name="android:actionBarStyle">@style/ContactsActionBarStyle</item>
-        <item name="android:homeAsUpIndicator">@drawable/ic_menu_back</item>
-        <item name="android:actionOverflowButtonStyle">@style/ContactsActionBarOverflow</item>
-        <item name="android:actionBarItemBackground">@drawable/action_bar_item_background</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
+        <item name="android:actionOverflowButtonStyle">@style/ContactsActionBarOverflowQP</item>
+        <item name="android:actionBarItemBackground">@drawable/item_background_material_borderless_dark</item>
         <item name="android:actionBarWidgetTheme">@style/ContactsActionBarTheme</item>
         <item name="android:textColorPrimary">@color/primary_text_color</item>
         <item name="android:textColorSecondary">@color/secondary_text_color</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
+        <item name="android:colorPrimaryDark">@color/primary_color_dark</item>
+        <item name="android:colorPrimary">@color/primary_color</item>
+        <item name="android:colorAccent">@color/primary_color</item>
     </style>
 
     <style name="EditorActivityTheme" parent="@style/PeopleTheme">
         <item name="android:listViewStyle">@style/ListViewStyle</item>
         <item name="android:actionBarStyle">@style/EditorActionBarStyle</item>
+        <item name="android:colorButtonNormal">@color/background_primary</item>
     </style>
 
     <style name="Theme">
@@ -55,6 +59,14 @@
         <item name="android:actionBarTabBarStyle">@style/ContactsActionBarTabBarStyle</item>
         <!-- Style for the tab bar text (for text on tabs) -->
         <item name="android:actionBarTabTextStyle">@style/ContactsActionBarTabTextStyle</item>
+
+        <!--  Drawable for the back button -->
+        <item name="android:homeAsUpIndicator">@drawable/ic_back_arrow</item>
+        <!-- Style for the overflow button in the actionbar. -->
+        <item name="android:actionOverflowButtonStyle">@style/ContactsActionBarOverflowQP</item>
+        <item name="android:actionModeCloseDrawable">@drawable/ic_close_lt</item>
+        <item name="android:fastScrollThumbDrawable">@drawable/fastscroll_thumb</item>
+        <item name="android:fastScrollTrackDrawable">@null</item>
         <item name="android:textColorPrimary">@color/primary_text_color</item>
         <item name="android:textColorSecondary">@color/secondary_text_color</item>
         <item name="android:listViewStyle">@style/ListViewStyle</item>
@@ -93,6 +105,7 @@
         <item name="list_item_presence_icon_margin">4dip</item>
         <item name="list_item_presence_icon_size">16dip</item>
         <item name="list_item_photo_size">@dimen/contact_browser_list_item_photo_size</item>
+        <item name="list_item_quick_call_size">48dip</item>
         <item name="list_item_profile_photo_size">70dip</item>
         <item name="list_item_prefix_highlight_color">@color/people_app_theme_color</item>
         <item name="list_item_background_color">@color/list_item_pinned_header_color</item>
@@ -119,6 +132,7 @@
     <style name="ContactsActionBarStyle" parent="@android:style/Widget.Material.ActionBar">
         <item name="android:background">@color/actionbar_background_color</item>
         <item name="android:titleTextStyle">@style/ContactsActionBarTitleText</item>
+        <item name="android:subtitleTextStyle">@style/ContactsActionBarSubTitleText</item>
         <item name="android:backgroundStacked">@color/actionbar_background_color</item>
         <!-- Empty icon -->
         <item name="android:icon">@android:color/transparent</item>
@@ -127,6 +141,7 @@
     <style name="EditorActionBarStyle" parent="@style/ContactsActionBarStyle">
         <!-- Do not use a contentInsetStart, since we are setting a custom ActionBar view -->
         <item name="android:contentInsetStart">0dp</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_check_white</item>
     </style>
 
     <!-- When this style was added, android:toolbarStyle was private. Therefore, this style
@@ -150,6 +165,11 @@
     <!-- Text in the action bar at the top of the screen -->
     <style name="ContactsActionBarTitleText"
            parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/actionbar_text_color</item>
+    </style>
+
+    <style name="ContactsActionBarSubTitleText"
+           parent="@android:style/TextAppearance.Material.Widget.ActionBar.Subtitle">
         <item name="android:textColor">@color/actionbar_text_color</item>
     </style>
 
@@ -288,11 +308,14 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="SpinnerButtonStyle" parent="@android:style/Widget.Material.Spinner">
+    <style name="SpinnerButtonStyle" parent="@android:style/Widget.Material.Spinner.Underlined">
         <!-- When applying the spinner style to a Button we need to disable the shadow animation
             on the button since the spinner background is transparent. Otherwise the spinner-button
             will look ridiculous. -->
         <item name="android:stateListAnimator">@null</item>
+        <!-- We want our spinner's to use the same gravity as an EditText, so that they look
+            visually consistent with other controls in our forms -->
+        <item name="android:gravity">start|center_vertical</item>
     </style>
 
     <style name="EditKindSeparatorTextViewStyle" parent="ContactListSeparatorTextViewStyle">
@@ -311,5 +334,16 @@
         since the Alert dialog is private. They are identical anyway. -->
     <style name="ContactsAlertDialogTheme" parent="@android:style/Theme.Material.Light.Dialog">
         <item name="android:colorAccent">@color/primary_color</item>
+    </style>
+
+    <style name="EditKindIconStyle">
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+        <item name="android:tint">@color/editor_icon_color</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <!-- We want 32dp of padding between these icon's and EditText's. Since EditText's have
+            4dp of starting padding built in, we set this as 28dp. -->
+        <item name="android:layout_marginEnd">28dp</item>
+        <item name="android:layout_marginTop">@dimen/editor_kind_icon_top_margin</item>
     </style>
 </resources>

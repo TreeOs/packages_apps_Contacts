@@ -11,6 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Events;
+import android.provider.CallLog.Calls;
+import android.text.Spannable;
 import android.text.TextUtils;
 import android.text.format.Time;
 import android.util.Log;
@@ -278,7 +280,7 @@ public class CalendarInteraction implements ContactInteraction {
     }
 
     @Override
-    public String getContentDescription(Context context) {
+    public Spannable getContentDescription(Context context) {
         // The default TalkBack is good
         return null;
     }
@@ -286,5 +288,13 @@ public class CalendarInteraction implements ContactInteraction {
     @Override
     public int getIconResourceId() {
         return CALENDAR_ICON_RES;
+    }
+
+    public String getAccountComponentName() {
+        return null;
+    }
+
+    public String getAccountId() {
+        return null;
     }
 }
